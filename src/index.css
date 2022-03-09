@@ -1,0 +1,264 @@
+.weatherContainer {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: 'center';
+
+  background: rgb(149, 229, 249);
+
+}
+
+.weatherCard {
+  margin: 0;
+  padding: 10px 50px;
+  transition: 0.3s all ease;
+  box-shadow: 0 1px 4px black, 0 0 40 rgb(133, 130, 130) inset;
+}
+.weatherCard:hover {
+  cursor: pointer;
+  box-shadow: 0 15px 10px -10px pink;
+}
+
+.Days {
+  color: #b8b8b8;
+  margin: 15px 0;
+}
+.icon {
+  width: 50px;
+  margin: 0 auto;
+}
+.Temp {
+  margin: 18px 0;
+  font-size: 14px;
+  color: #212529;
+}
+.Temp .span {
+  margin: 0 3px;
+}
+.Temp .min {
+  font-weight: 700;
+}
+.Temp .max {
+  font-weight: 700;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.weather-nav {
+  background-color: #c6de41;
+  padding: 30px;
+  text-align: center;
+  color: #153b44;
+  font-size: 60px;
+}
+.weather {
+  background-color: #20a6ad(216, 195, 11);
+  padding: 10px;
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  box-shadow: 3px 6px #ff7c7c(0, 0, 0, 0.2);
+}
+
+/* *{
+  background-color:aquamarine;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+
+.app {
+  background-image: url('https://images.unsplash.com/photo-1593978301851-40c1849d47d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d2VhdGhlciUyMGFwcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1400&q=60');
+  background-size: cover;
+
+  transition: 0.4 ease;
+
+
+
+    align-items: center;
+
+
+}
+
+.search-box {
+  width: 100%;
+  margin: 0 0 75px;
+}
+
+.search-box .search-bar {
+  display: block;
+  width: 100%;
+  padding: 15px;
+
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0px 0px 16px 16px;
+  margin-top: -25px;
+
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
+
+  color: #313131;
+  font-size: 20px;
+
+  transition: 0.4s ease;
+}
+
+.search-box .search-bar:focus {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.location-box .location {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
+
+.location-box .date {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  text-align: center;
+  text-shadow: 2px 2px rgba(50, 50, 70, 0.5);
+}
+
+.weather-box {
+  text-align: center;
+}
+
+.weather-box .temp {
+  position: relative;
+  display: inline-block;
+  margin: 30px auto;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+
+  padding: 15px 25px;
+
+  color: red;
+  font-size: 102px;
+  font-weight: 900;
+
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+  text-align: center;
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.weather-box .weather {
+  color: #fff;
+  font-size: 48px;
+  font-weight: 700;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
+.search-box .search-bar {
+  display: block;
+  width: 100%;
+  padding: 15px;
+
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0px 0px 16px 16px;
+  margin-top: -25px;
+
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
+
+  color: #313131;
+  font-size: 20px;
+
+  transition: 0.4s ease;
+}
+.weather {
+  padding: 30px;
+  color:red;
+  font-size: 102px;
+  font-weight: 900;
+
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+  text-align: center;
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+
+.weather {
+  padding: 30px;
+  color:red;
+  font-size: 102px;
+  font-weight: 900;
+
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+  text-align: center;
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+} */
+
+/*
+.map-body .h1 {
+  padding: 10px;
+}
+
+.search {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  z-index: 10;
+  padding: 0;
+} */
+
+/* @import url("https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Handlee|Josefin+Sans:700&display=swap");
+body {
+  background: url("./assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.outerBox {
+  margin-top: 30px !important;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  width: 500px;
+  margin: auto;
+  border-radius: 5px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2), 0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+
+.searchButton {
+  border: 2px solid green;
+  background-color: transparent;
+  padding: 15px;
+  margin-left: 20px;
+  border-radius: 50px;
+  color: seagreen;
+  font-weight: 700;
+  font-family: "Raleway", sans-serif;
+  cursor: pointer;
+}
+
+.currentWeather {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.mainTemp {
+  font-size: 35px;
+  font-weight: 700;
+  color: #0086c7;
+  font-family: "Handlee", cursive;
+}
+
+.feelsLike {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: "Handlee", cursive;
+} */
