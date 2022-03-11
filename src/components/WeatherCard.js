@@ -1,33 +1,20 @@
-
 import React from 'react';
 
 export default function WeatherCard(props) {
-  if(!props.data) return;
-  //logic for
-  const temp = props.data.list[props.dayNum].main.temp;
-  const city = props.data.city.name;
-  const weather = props.data.list[props.dayNum].description;
-  const humidity = props.data.list[props.dayNum].humidity;
-
-  // useEffect(() => {
-  //   if (markers && markers[0]) fetchWeather(markers[0].lat, markers[0].lng);
-  // }, [markers]);
-
-
-
+  if (!props.data) return;
+  //logic for 0 3 ....
+  const index = props.dayNum * 8;
+  const temp = props.data.list[index].main.temp;
+  const weather = props.data.list[index].weather[0].description;
+  const date = props.data.list[index].dt_txt;
+  const humidity = props.data.list[index].main.humidity; //data.list[props.dayNum].main.humidity
 
   return (
     <div>
       <center>
-        <h2>Here is Your forecast for {props.dayNum} </h2>
-
+        <h2>Here is Your forecast for {date} </h2>
         <div>
-          {/* <!-- {props.markers && props.markers[0]
-        ? `${props.markers[0].lat}, ${props.markers[0].lng}`
-        : null} --> */}
-          <h2>City: {city}</h2>
           <h2>Temperature: {temp}ºC</h2>
-
           <h2>Humidity: {humidity}</h2>
           <h2>Conditions: {weather}</h2>
         </div>

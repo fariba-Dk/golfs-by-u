@@ -93,7 +93,7 @@ export default function Weather(props) {
   //------------- Return here
   // if (loadError) return 'Error';
   // if (!isLoaded) return 'Loading...';
-  if(!data)return (<div>Loading...</div>)
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div>
@@ -102,7 +102,7 @@ export default function Weather(props) {
         {/* <Icon icon={props.icon} /> */}
         <Temp temp={props.temp} />
         <div>
-          <form value={data.city}>
+          <form value={data.city.name}>
             <input
               type='text'
               placeholder='Enter city'
@@ -112,10 +112,11 @@ export default function Weather(props) {
             <button onKeyPress={fetchWeather} type='submit'>
               Get Weather
             </button>
-            <h2>City: {data.city}</h2>
+            <h2>City: {data.city.name}</h2>
           </form>
         </div>
-        {/* <WeatherCard data={data} dayNum={0} /> */}
+        <WeatherCard data={data} dayNum={0} />
+        <WeatherCard data={data} dayNum={1} />
         {/* <center>
           <h2>Here is Your forecast for Today {dateBuilder(new Date())}</h2>
           setCity( event.target.value );
