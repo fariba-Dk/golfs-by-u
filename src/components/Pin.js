@@ -76,7 +76,7 @@ export default function Pin({ markers, setMarkers }) {
       <GoogleMap
         id='map'
         mapContainerStyle={mapContainerStyle}
-        zoom={12}
+        zoom={8}
         center={center}
         options={options}
         onClick={onMapClick}
