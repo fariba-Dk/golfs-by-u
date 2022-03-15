@@ -11,6 +11,7 @@
 }
 
 .weatherCard {
+  display:flex;
   margin: 0;
   padding: 10px 50px;
   transition: 0.3s all ease;
