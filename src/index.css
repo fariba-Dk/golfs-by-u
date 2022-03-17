@@ -1,26 +1,59 @@
 .weatherContainer {
   width: 100%;
-  height: 60%;
+  height: 40%;
   display: flex;
+  flex-direction:row;
   text-align: center;
   align-items: center;
   justify-content: 'center';
-
-  background: rgb(149, 229, 249);
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, red , yellow);
 
 }
+/* HTML CSSResult Skip Results Iframe
+EDIT ON
+body {
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+div {
+  width: 100px;
+  height: 100px;
+}
+.area {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+div:nth-child(4) {
+  background: #eee;
+  box-shadow: 0 8px 8px -4px lightblue; */
 
 .weatherCard {
-  display:flex;
+  box-shadow: 3px 6px #ff7c7c(0, 0, 0, 0.2);
+  /* display: grid; */
+  /* gap: 3rem; */
+  /* grid-template-columns: repeat(3, 1fr); */
+  height: 100%;
   margin: 0;
+  /* display: grid; */
+  place-items: center;
+  /* display:flex; */
+  /* flex-direction:column; */
   padding: 10px 50px;
   transition: 0.3s all ease;
   box-shadow: 0 1px 4px black, 0 0 40 rgb(133, 130, 130) inset;
+  /* background: #eee; */
+  box-shadow: 0 8px 8px -4px lightblue;
 }
-.weatherCard:hover {
+/* .weatherCard:hover {
   cursor: pointer;
   box-shadow: 0 15px 10px -10px pink;
-}
+} */
 
 .Days {
   color: #b8b8b8;
@@ -47,20 +80,20 @@
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-.weather-nav {
+/* .weather-nav {
   background-color: #c6de41;
   padding: 30px;
   text-align: center;
   color: #153b44;
   font-size: 60px;
-}
+} */
 .weather {
   background-color: #20a6ad(216, 195, 11);
-  padding: 10px;
+
   color: black;
-  font-size: 20px;
+  font-size: 10px;
   text-align: center;
-  box-shadow: 3px 6px #ff7c7c(0, 0, 0, 0.2);
+
 }
 
 /* *{

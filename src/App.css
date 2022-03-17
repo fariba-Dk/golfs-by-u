@@ -126,3 +126,7 @@
   text-align: center;
   box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
 }
+.mainCard{
+  display:flex;
+  flex-direction:row;
+}

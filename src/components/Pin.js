@@ -36,12 +36,17 @@ const center = {
   lat: 37.7749,
   lng: -122.4194,
 };
+// require('dotenv').config();
+// const googleMapsApiKey=process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
 export default function Pin({ markers, setMarkers }) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey:"AIzaSyB1fByA0ZCLSYpzyNAlcVJTwIEUNDYuaIE",
     libraries,
+//check the env with react
   });
+  //const a ="AIzaSyB1fByA0ZCLSYpzyNAlcVJTwIEUNDYuaIE"
+// console.log('this is the key--->',process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
   const [selected, setSelected] = React.useState(null);
 
@@ -59,8 +64,9 @@ export default function Pin({ markers, setMarkers }) {
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
+    //add logic for https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete#maps_places_autocomplete-javascript for listiner for autocompelete
   }, []);
-
+//
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(10);

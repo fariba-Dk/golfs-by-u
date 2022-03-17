@@ -3,7 +3,6 @@ import '../index.css';
 import React, { useState, useEffect } from 'react';
 import WeatherCard from '../components/WeatherCard';
 
-
 const MyURL =
   'http://api.openweathermap.org/data/2.5/forecast?lat=37.7749&lon=-122.4194&appid=0e94ff0e87c051d7531693a200fce67d&units=metric';
 //react-weather api key: 0e94ff0e87c051d7531693a200fce67d
@@ -43,26 +42,22 @@ export default function Weather(props) {
   const newLocal = 1;
   return (
     <div>
-      <div className='weatherCard'>
-        <WeatherCard
-          data={data}
-          dayNum={0}
-        />
-        <WeatherCard data={data} dayNum={1} />
-        <WeatherCard data={data} dayNum={3} />
-        <center>
-          <form>
-            <input
-              type='text'
-              placeholder='Enter city'
-              onKeyPress={fetchWeather}
-            />
-            <button onKeyPress={fetchWeather} type='submit'>
-              Get Weather
-            </button>
-          </form>
-        </center>
-      </div>
+      <WeatherCard data={data} dayNum={0} />
+      <WeatherCard data={data} dayNum={1} />
+      <WeatherCard data={data} dayNum={2} />
+
+      <center>
+        <form>
+          <input
+            type='text'
+            placeholder='Enter city'
+            onKeyPress={fetchWeather}
+          />
+          <button onKeyPress={fetchWeather} type='submit'>
+            Get Weather
+          </button>
+        </form>
+      </center>
     </div>
   );
 }

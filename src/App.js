@@ -24,12 +24,11 @@ export default function App() {
 
   return (
     <div className='App'>
-      <div className='weatherContainer p3-3 pb-3'>
+      <div className='weatherContainer'>
         <Weather markers={markers} />
       </div>
-      <div>
-        <Pin markers={markers} setMarkers={setMarkers} />
-      </div>
+
+      <Pin markers={markers} setMarkers={setMarkers} />
     </div>
   );
 }
