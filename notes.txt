@@ -1,5 +1,13 @@
 2/28
 
+const MyURL =
+  http://api.openweathermap.org/data/2.5/forecast?lat=37.7749&lon=-122.4194&appid=0e94ff0e87c051d7531693a200fce67d&units=metric
+
+
+  react-weather api key: 0e94ff0e87c051d7531693a200fce67d
+
+
+
 make your directory--> drag to your VS side bar ->
 npx create-react-app .
 
@@ -14,6 +22,8 @@ my weather for my api
 
 api.openweathermap.org/data/2.5/weather?lat=34&lon=-120&appid=AIzaSyB1fByA0ZCLSYpzyNAlcVJTwIEUNDYuaIE
 
+client-side storage
+AIzaSyB1fByA0ZCLSYpzyNAlcVJTwIEUNDYuaI
 
 
 

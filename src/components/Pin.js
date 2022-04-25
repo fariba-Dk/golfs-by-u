@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   GoogleMap,
   useLoadScript,
@@ -9,6 +10,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
+
 import {
   Combobox,
   ComboboxInput,
@@ -16,37 +18,32 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox';
-import { formatRelative } from 'date-fns';
 
-import '@reach/combobox/styles.css';
-// import mapStyles from './mapStyles';
+import { formatRelative } from 'date-fns';
 
 const libraries = ['places'];
 const mapContainerStyle = {
-  height: '50vh',
+  height: '80vh',
   width: '100vw',
 };
 const options = {
-  // styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
 };
 ////37.7749° N, 122.4194° W
 const center = {
-  lat: 37.7749,
-  lng: -122.4194,
+  lat: 32.905431,
+  lng: -117.243229,
 };
 // require('dotenv').config();
-// const googleMapsApiKey=process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+const googleMapsApiKey=process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
 export default function Pin({ markers, setMarkers }) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey:"AIzaSyB1fByA0ZCLSYpzyNAlcVJTwIEUNDYuaIE",
     libraries,
-//check the env with react
+
   });
-  //const a ="AIzaSyB1fByA0ZCLSYpzyNAlcVJTwIEUNDYuaIE"
-// console.log('this is the key--->',process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
   const [selected, setSelected] = React.useState(null);
 
@@ -69,8 +66,10 @@ export default function Pin({ markers, setMarkers }) {
 //
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
+    console.log('this is test--->')
     mapRef.current.setZoom(10);
   }, []);
+
 
   if (loadError) return 'Error';
   if (!isLoaded) return 'Loading...';
@@ -82,7 +81,7 @@ export default function Pin({ markers, setMarkers }) {
       <GoogleMap
         id='map'
         mapContainerStyle={mapContainerStyle}
-        zoom={8}
+        zoom={12}
         center={center}
         options={options}
         onClick={onMapClick}
@@ -155,23 +154,23 @@ function Search({ panTo }) {
   };
 
   return (
-    <div className='search'>
+        <div className='search'>
       <Combobox onSelect={handleSelect}>
         <ComboboxInput
           value={value}
           onChange={handleInput}
           disabled={!ready}
           placeholder='Search your location'
+
         />
-        <ComboboxPopover>
-          <ComboboxList>
+        <ComboboxList>
             {status === 'OK' &&
-              data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description} />
+            data.map( ( { id, description } )=> (
+                <ComboboxOption key={id} value={description} onSelect={handleSelect} />
               ))}
           </ComboboxList>
-        </ComboboxPopover>
       </Combobox>
     </div>
+
   );
 }

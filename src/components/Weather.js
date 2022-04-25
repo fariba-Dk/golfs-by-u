@@ -1,5 +1,4 @@
 import axios from 'axios';
-import '../index.css';
 import React, { useState, useEffect } from 'react';
 import WeatherCard from '../components/WeatherCard';
 
@@ -12,8 +11,8 @@ const libraries = ['places'];
 export default function Weather(props) {
   const [data, setData] = useState();
 
-  const [latitude, setLatitude] = useState(37.7749);
-  const [longitude, setLongitude] = useState(-122.4194);
+  const [latitude, setLatitude] = useState();//37.7749
+  const [longitude, setLongitude] = useState();//-122.4194
 
   const savePositionToState = (position) => {
     setLatitude(position.coords.latitude);
