@@ -6,13 +6,16 @@
 .map-h2{
   position:absolute;
   top:.7rem;
-  left:14rem;
+  left:1rem;
   color:rgb(33, 88, 33);
   z-index:40;
   margin:0;
   padding:0;
   background-color:white;
+}
 
+
+/*
 }
 .search{
   position:absolute;
@@ -26,7 +29,7 @@
   padding:0;
   /* background-color:white; */
 
-}
+
 
 .weatherContainer {
   width: 100%;

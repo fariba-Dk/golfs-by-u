@@ -1,5 +1,6 @@
 import usePlacesAutocomplete from "use-places-autocomplete";
-import {Search} from './Search'
+import { Search } from './Search'
+
 
 export default function PlacesAutocomplete() {
   function Locate( { panTo } ) {

@@ -13,10 +13,7 @@ export default function App() {
       {/* <div className='weatherContainer'>
         <Weather markers={markers} />
       </div> */}
-      {/* <div>
-        <PlacesAutocomplete/>
-      </div> */}
-      <div>
+        <div>
           <Pin />
       </div>
     </div>
