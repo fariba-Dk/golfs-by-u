@@ -1,0 +1,20 @@
+this app
+click the map to add a location pin
+search box with google places
+geolocation icon uses browser geolocation to pull u in where I am
+
+main packages used:
+
+1. react-google-map-api
+2. use-places-Autocomplete to manage and suggest user input in SEARCH BOX
+3. reach-Combobox to show search result
+4. Google Geolocation: pulls users location to the browser uses Browser GeoLocation
+
+React Hooks:
+REACT-GOOGLE HOOK => useLoadScript
+useState
+useRef
+useCallback
+
+Places Api
+Map javscript Api

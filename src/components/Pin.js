@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   GoogleMap,
@@ -6,90 +6,90 @@ import {
   Marker,
   InfoWindow,
 } from '@react-google-maps/api';
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from 'use-places-autocomplete';
-import "@reach/combobox/styles.css"
 
-
-
+//date stamp
 import { formatRelative } from 'date-fns';
 
-const libraries = ['places'];
+import '../index.css'
+
+//Map props we need for map UI
+const libraries = [ "places" ];
+
 const mapContainerStyle = {
-  height: '80vh',
+  height: '100vh',
   width: '100vw',
 };
-const options = {
-  disableDefaultUI: true,
-  zoomControl: true,
-};
-////37.7749° N, 122.4194° W
+//San Fran lat/lng
 const center = {
   lat: 32.905431,
   lng: -117.243229,
 };
-// require('dotenv').config();
-const googleMapsApiKey=process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
-export default function Pin( { markers, setMarkers } ) {
+export default function Pin() {
 
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey:"AIzaSyB1fByA0ZCLSYpzyNAlcVJTwIEUNDYuaIE",
+  //react google hook to load api
+  const { isLoaded, loadError } = useLoadScript( {
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     libraries,
+  } );
 
-  });
+  //hook to set state for PIN
+  const [ pins, setPins ] = React.useState( [] )
+  const [ selected, setSelected ] = React.useState( null );
 
-  const [selected, setSelected] = React.useState(null);
-
-  const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
-  }, []);
-  //useRef, useCallback, useLoadScript
-  const mapRef = React.useRef();
-  const onMapLoad = React.useCallback((map) => {
+    const mapRef = React.useRef();
+    const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
-    //add logic for https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete#maps_places_autocomplete-javascript for listiner for autocompelete
-  }, []);
-//
-  const panTo = React.useCallback(({ lat, lng }) => {
+    }, []);
+
+    const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    console.log('this is test--->')
-    mapRef.current.setZoom(10);
-  }, []);
+    mapRef.current.setZoom(14);
+    }, []);
 
-
+  if ( loadError ) return "Error loading maps"
+  if ( !isLoaded ) return "Loading Maps..."
 
   return (
-    <div className="search">
-      {/* <Search panTo={panTo} /> */}
 
+    <div>
+       <h1 className="map-h2">
+        Golf'SByU{" "}
+        <span role="img" aria-label="tent">
+          ⛳️
+        </span>
+      </h1>
       <GoogleMap
-        id='map'
-        mapContainerStyle={mapContainerStyle}
-        zoom={12}
-        center={center}
-        options={options}
-        onClick={onMapClick}
-        onLoad={onMapLoad}
+        mapContainerStyle={ mapContainerStyle }
+        zoom={ 8 }
+        center={ center }
+
+      /*  THIS IS WHAT CONSOLE GIVES US
+        onClick={ ( e ) => {
+           _.zl {latLng: _.Ee, domEvent: MouseEvent, pixel: _.I, xb: _.I}
+          latLng: _.Ee {lat: ƒ, lng: ƒ}
+          [[Prototype]]: Object
+          ~~~~ WE USE THE CONSOLE INFO WE GET TO SET-STATE IN OUR COMPONENT
+      */
+        onClick={ ( e ) => {
+          e.preventDefault();
+          setPins( ( currentPin ) => [
+            ...currentPin, {
+            lat: e.tatLng.lat(),
+            lng: e.latLng.lng(),
+            pinnedTime: new Date()
+          } ] )
+      }}
       >
-        {markers.map((marker) => (
+        {/* Show pins */ }
+
+        { pins.map( ( pin ) => (
           <Marker
-            key={`${marker.lat}-${marker.lng}`}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}
-          />
-        ))}
+            key={ pin.time.toISOString() }
+            position={ { lat: pin.lat, lng: pin.lng } }
+            icon='⛳️'
+        />
+        ) ) }
 
         {selected ? (
           <InfoWindow
@@ -102,7 +102,6 @@ export default function Pin( { markers, setMarkers } ) {
               <h2>
                 <span role='img' aria-label='bear'>
                   📍
-                  
                 </span>{' '}
                 You are Here!
               </h2>
@@ -112,43 +111,33 @@ export default function Pin( { markers, setMarkers } ) {
         ) : null}
       </GoogleMap>
     </div>
-
-
-  // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
-// function Search( { panTo } ) {
-
-//   const {
-//     ready,
-//     value,
-//     suggestions: { status, data },
-//     setValue,
-//     clearSuggestions,
-//   } = usePlacesAutocomplete({
-//     requestOptions: {
-//       location: { lat: () => 43.6532, lng: () => -79.3832 },
-//       radius: 100 * 1000,
-//     },
-//   } );
-
-//   const handleInput = (e) => {
-//     setValue(e.target.value);
-//   };
-
-//   const handleSelect = async ( address ) => {
-
-//     setValue(address, false);
-//     clearSuggestions();
-//     try {
-//       const results = await getGeocode({ address });
-//       const { lat, lng } = await getLatLng(results[0]);
-//       panTo({ lat, lng });
-//     } catch (error) {
-//       console.log('😱 Error: ', error);
-//     }
-//   };
-
-
-
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

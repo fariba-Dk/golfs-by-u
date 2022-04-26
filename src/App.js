@@ -6,18 +6,19 @@ import PlacesAutocomplete from './components/PlacesAutocomplete'
 
 export default function App() {
 
-  const [markers, setMarkers] = React.useState([]); //making state global
+
 
   return (
     <div className='App'>
-      <div className='weatherContainer'>
+      {/* <div className='weatherContainer'>
         <Weather markers={markers} />
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <PlacesAutocomplete/>
+      </div> */}
+      <div>
+          <Pin />
       </div>
-
-      <Pin markers={markers} setMarkers={setMarkers} />
     </div>
   );
 }
