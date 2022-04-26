@@ -10,14 +10,9 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
+import "@reach/combobox/styles.css"
 
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from '@reach/combobox';
+
 
 import { formatRelative } from 'date-fns';
 
@@ -38,7 +33,8 @@ const center = {
 // require('dotenv').config();
 const googleMapsApiKey=process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
-export default function Pin({ markers, setMarkers }) {
+export default function Pin( { markers, setMarkers } ) {
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey:"AIzaSyB1fByA0ZCLSYpzyNAlcVJTwIEUNDYuaIE",
     libraries,
@@ -71,12 +67,10 @@ export default function Pin({ markers, setMarkers }) {
   }, []);
 
 
-  if (loadError) return 'Error';
-  if (!isLoaded) return 'Loading...';
 
   return (
-    <div>
-      <Search panTo={panTo} />
+    <div className="search">
+      {/* <Search panTo={panTo} /> */}
 
       <GoogleMap
         id='map'
@@ -108,6 +102,7 @@ export default function Pin({ markers, setMarkers }) {
               <h2>
                 <span role='img' aria-label='bear'>
                   📍
+                  
                 </span>{' '}
                 You are Here!
               </h2>
@@ -117,60 +112,43 @@ export default function Pin({ markers, setMarkers }) {
         ) : null}
       </GoogleMap>
     </div>
-  );
-}
 
-function Search({ panTo }) {
-  const {
-    ready,
-    value,
-    suggestions: { status, data },
-    setValue,
-    clearSuggestions,
-  } = usePlacesAutocomplete({
-    requestOptions: {
-      location: { lat: () => 43.6532, lng: () => -79.3832 },
-      radius: 100 * 1000,
-    },
-  });
 
   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
+// function Search( { panTo } ) {
 
-  const handleInput = (e) => {
-    setValue(e.target.value);
-  };
+//   const {
+//     ready,
+//     value,
+//     suggestions: { status, data },
+//     setValue,
+//     clearSuggestions,
+//   } = usePlacesAutocomplete({
+//     requestOptions: {
+//       location: { lat: () => 43.6532, lng: () => -79.3832 },
+//       radius: 100 * 1000,
+//     },
+//   } );
 
-  const handleSelect = async (address) => {
-    setValue(address, false);
-    clearSuggestions();
+//   const handleInput = (e) => {
+//     setValue(e.target.value);
+//   };
 
-    try {
-      const results = await getGeocode({ address });
-      const { lat, lng } = await getLatLng(results[0]);
-      panTo({ lat, lng });
-    } catch (error) {
-      console.log('😱 Error: ', error);
-    }
-  };
+//   const handleSelect = async ( address ) => {
 
-  return (
-        <div className='search'>
-      <Combobox onSelect={handleSelect}>
-        <ComboboxInput
-          value={value}
-          onChange={handleInput}
-          disabled={!ready}
-          placeholder='Search your location'
+//     setValue(address, false);
+//     clearSuggestions();
+//     try {
+//       const results = await getGeocode({ address });
+//       const { lat, lng } = await getLatLng(results[0]);
+//       panTo({ lat, lng });
+//     } catch (error) {
+//       console.log('😱 Error: ', error);
+//     }
+//   };
 
-        />
-        <ComboboxList>
-            {status === 'OK' &&
-            data.map( ( { id, description } )=> (
-                <ComboboxOption key={id} value={description} onSelect={handleSelect} />
-              ))}
-          </ComboboxList>
-      </Combobox>
-    </div>
 
-  );
+
+  )
 }
+
