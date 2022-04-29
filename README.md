@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# PostgreSQL (Object-Relational Database)
+PostgreSQL is a powerful, open source object-relational database management system (ORDBMS) with an emphasis on extensibility and standards compliance that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads. PostgreSQL is ACID-compliant, transactional, that stores the data in the tabular format and uses constraints, triggers, roles, stored procedures and views as the core components.
 The weather app must have all the basic functions, including city name,
 current weather icon,
 temperature,
@@ -15,7 +16,36 @@ While developing this weather app, you will learn how to connect to an external 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Express (Back-End Framework)
+It is a web application framework for Node.js. Being a free and open software, it is used for building web applications and specially APIs. Express provides a thin layer of fundamental web application features, without obscuring Node.js features that you already know.
+Why use Express?
+Provides a robust set of features for both web and mobile applications
+Makes back-end code easier and simpler to write.
+Supports many middleware.
+Minimal and Flexible web application framework.
+Creating efficient and robust API is quick and easy.
+Allows you to define an error handling middleware.
+
+
+## React (Front-End Library)
+React is basically a JavaScript library for building user interfaces. It is easy, efficient and painless way to create Interactive UIs. It is maintained by Facebook and a community of individual developers and companies. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes and for this reason only, it is used for developing single-page application or mobile applications.
+Why use React?
+Virtual DOM in ReactJS makes user experience better and developer’s work faster
+It guarantees stable code.
+React allows its components to be reused saving time and effort.
+Provides high performance.
+Provide the feature of Virtual DOM.
+SEO friendly!
+## Node.js (JavaScript runtime environment)
+Node.js is a JavaScript runtime built on Chrome’s V8 JavaScript engine for developing server-side and networking applications. Being an asynchronous event-driven JavaScript runtime, it is used to build fast and scalable network applications. Node.js is free and open source server environment that runs on many platforms.
+Why Node.js?
+Provides event-driven and asynchronous features which makes it lightweight and efficient.
+No buffering and thus, is very fast.
+Highly Scalable.
+Highly extensible.
+Provides advantage of caching.
+Handles thousands of concurrent connections with a single server.
+Provides vast number of libraries.
 
 In the project directory, you can run:
 

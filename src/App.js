@@ -1,7 +1,7 @@
 import React from 'react';
 import Weather from './components/Weather.js';
 import Pin from './components/Pin';
-import PlacesAutocomplete from './components/PlacesAutocomplete'
+import AutoComplete from './components/AutoComplete'
 import Search from './components/Search'
 
 export default function App() {
@@ -13,8 +13,15 @@ export default function App() {
       {/* <div className='weatherContainer'>
         <Weather markers={markers} />
       </div> */}
-       <div>
-          <Search />
+      {/* <div>
+        <Search/>
+      </div> */}
+        <div>
+        <Search/>
+      </div>
+
+      <div>
+        <AutoComplete/>
       </div>
 
       <div>

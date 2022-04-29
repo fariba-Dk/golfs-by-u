@@ -1,0 +1,80 @@
+~~~~~~~~~~~~~~~~~~~~~~  DATABASE  golf_by_u
+golf_by_u=# \c golf_by_u
+You are now connected to database "golf_by_u" as user "faribadadko".
+golf_by_u=# \d
+                  List of relations
+ Schema |        Name        |   Type   |    Owner
+--------+--------------------+----------+-------------
+ public | courses            | table    | faribadadko
+ public | courses_id_seq     | sequence | faribadadko
+ public | reviews            | table    | faribadadko
+ public | reviews_id_seq     | sequence | faribadadko
+ public | user_player        | table    | faribadadko
+ public | user_player_id_seq | sequence | faribadadko
+(6 rows)
+
+
+
+
+~~~~~~~~~~~~~~~ courses table ~~~~~~~~~~~~~~~~~
+
+courses table:
+ id
+ name
+ location
+ num_holes
+ description
+ years_open
+ is_pga_approved
+
+======> golf_by_u=# SELECT * FROM courses;
+ id |        name         |    location     | num_holes |                                                                                                        description                                                                                                        | years_open | is_pga_approved
+----+---------------------+-----------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+-----------------
+  1 | rancho_park         | marvista        |        18 | The golf course was designed in 1924 by the renowned team of  George C. Thomas and William P. “Billy” Bell who also designed Riviera CC, Bel Air CC, Los Angeles CC North and the course at Ojai Valley Inn.              |            | t
+  2 | rancho_palas_verdes | palas_verdes CA |        18 | The course is a classic example of Thomas and Bell designs of the 1920’s with extensive use of natural hazards. The premium is on accuracy rather than length. While not long in length at 6433 yards                     |            | t
+  3 | penmar              | venice_beach CA |         9 | Just blocks from Venice Beach, this executive length course is the perfect track to hone your short game skills. With six par 4s and three par 3s. Penmar was rated “Best Nine Hole Golf Course” by Los Angeles Magazine! |            | t
+(3 rows)
+
+
+
+~~~~~~~~~~~~~~~ user_player table ~~~~~~~~~~~~~~~~~
+
+user_player table:
+ id
+ first_name
+ last_name
+ email
+ location
+ golf_handicap
+ active_player
+
+=======> golf_by_u=# SELECT * FROM user_player
+
+ id | first_name | last_name |      email       | location | golf_handicap | active_player
+----+------------+-----------+------------------+----------+---------------+---------------
+  1 | Fariba     | dk        | friba@gmail.com  | LA       |            13 | t
+  2 | chris      | drews     | chris@gmail.com  | CA       |            10 | t
+  3 | al         | smith     | albert@gmail.com | TX       |            20 | t
+  4 | mary       | djargo    | mj@gmail.com     | SD       |            13 | t
+(4 rows)
+
+
+~~~~~~~~~~~~~~~ reviews table ~~~~~~~~~~~~~~~~~
+
+ id
+ user_player_id
+ courses_id
+ title
+ description                                                                                                                      |
+ posting_date
+
+=======> golf_by_u=# SELECT * FROM reviews
+ id | user_player_id | courses_id |          title           |                                                                                                                      description                                                                                                                      | posting_date
+----+----------------+------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------
+  1 |              3 |          2 | what is in your bag?     | Hi there. Thank you so much for the great review. We are glad you had an incredible time, and we hope to see you again soon! Thanks for choosing Los Lagos at Costa Mesa Golf & Country Club.                                                         | 2022-09-12
+  3 |              3 |          2 | never too late or is it? | rancho_park is in great shape overall but the fairways in many areas are getting divot laced. 3 very good tee shots and my ball finished in a fairway divot....two of those times in areas that it was almost impossible to avoid them unfortunately. | 2022-01-11
+(2 rows)
+
+
+
+
