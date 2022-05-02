@@ -1,4 +1,6 @@
 import React from 'react';
+import WeatherCard from './WeatherCard'
+import Weather from './Weather'
 import {
   GoogleMap,
   useLoadScript,
@@ -77,12 +79,12 @@ export default function Pin() {
   return (
 
     <div>
-       <h1 className="map-h2">
+       {/* <h1 className="map-h2">
         Golf'sByU{" "}
         <span role="img" aria-label="tent">
           ⛳️
         </span>
-      </h1>
+      </h1> */}
       <GoogleMap
         id="map"
         mapContainerStyle={ mapContainerStyle }
@@ -125,13 +127,15 @@ export default function Pin() {
             <div>
               <h2>
                 <span role="img" aria-label="bear">
-                  🐻
+                  ⛳️
                 </span>{" "}
-                Alert
+                Here
               </h2>
-              <p>Spotted {formatRelative(selected.time, new Date())}</p>
+              <p>Golf Course by you { formatRelative( selected.time, new Date() ) }
+              </p>
             </div>
           </InfoWindow>
+
         ) : null}
       </GoogleMap>
     </div>

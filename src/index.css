@@ -3,26 +3,28 @@
   padding: 0;
   box-sizing:border-box;
 }
-.map-h2{
+.map-h1{
+  font-size:20px;
   position:absolute;
   top:.7rem;
-  left:02%;
-  color:rgb(33, 88, 33);
+  left:0%;
+  color:#197019;
   z-index:10;
   margin:0;
   padding:0;
  background-color:transparent;
 }
 .search{
-  font-size:30px;
+  font-size:15px;
   position:absolute;
   top:.7rem;
-  left: 50%;
-  transform:black;
-  width: 100%;
-  color:rgb(33, 88, 33);
+  left: 80%;
+  transform:orange;
+  width: 20%;
+  color: white;
   z-index:10;
   margin:0;
   padding:0;
-  background-color:rgb(164, 229, 164);
+  background-color: #4050B5;
+
 }

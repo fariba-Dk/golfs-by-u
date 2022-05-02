@@ -1,8 +1,10 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 
 export default function WeatherCard(props) {
-  if (!props.data) return;
+
   //logic for 0 3 ....
   const index = props.dayNum * 8;
   const tempFar = Math.round((props.data.list[index].main.temp * 9) / 5 + 33);
@@ -19,11 +21,19 @@ export default function WeatherCard(props) {
   const formattedDate = format(date, 'PPPP'); //=> 'Nov'
   const humidity = props.data.list[index].main.humidity; //data.list[props.dayNum].main.humidity
 
-  //use js in-line to format date
-  //use 3rd party library to format date
-  //date
+   const [data, setData] = useState();
+
+  const [latitude, setLatitude] = useState();//37.7749
+  const [longitude, setLongitude] = useState();//-122.4194
+
+  const savePositionToState = (position) => {
+    setLatitude(position.coords.latitude);
+    setLongitude(position.coords.longitude);
+  };
+
 
   return (
+
     <div>
       <div className='weatherCard'>
         <h3>{formattedDate} </h3>

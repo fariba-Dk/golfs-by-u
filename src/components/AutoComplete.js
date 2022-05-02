@@ -29,14 +29,14 @@ export default function AutoComplete(){
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
 
-            <input {...getInputProps({ placeholder: "Search..." })} />
+            <input styles={{}} {...getInputProps({ placeholder: "Search..." })} />
 
             <div>
               {loading ? <div>...loading</div> : null}
 
               {suggestions.map(suggestion => {
                 const style = {
-                  backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                  backgroundColor: suggestion.active ? "orange" : "#197019"
                 };
 
                 return (
@@ -46,8 +46,8 @@ export default function AutoComplete(){
 
                 );
               } ) }
-              <h6>Latitude: { coordinates.lat }</h6>
-              <h6>Longitude: { coordinates.lng }</h6>
+              <h6>Latitude: { coordinates.lat } {"   "}Longitude: { coordinates.lng }</h6>
+
             </div>
           </div>
         )}

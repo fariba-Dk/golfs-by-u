@@ -51,7 +51,7 @@ export default function Search({ panTo }) {
 
   return (
     <div className="search">
-      <Combobox onSelect={handleSelect}>
+      {/* <Combobox onSelect={handleSelect}>
         <ComboboxInput
           value={value}
           onChange={handleInput}
@@ -67,7 +67,7 @@ export default function Search({ panTo }) {
               ))}
           </ComboboxList>
         </ComboboxPopover>
-      </Combobox>
+      </Combobox> */}
     </div>
   );
 }

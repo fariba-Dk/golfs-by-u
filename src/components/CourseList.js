@@ -1,6 +1,10 @@
 import React from 'react'
+import useStyles from './courseListStyle'
 
- const CourseList = () => {
+const CourseList = () => {
+
+  const classes = useStyles()
+  
   return (
     <h1>
       CourseList
