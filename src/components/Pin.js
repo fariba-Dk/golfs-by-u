@@ -1,28 +1,15 @@
 import React from 'react';
-import WeatherCard from './WeatherCard'
-import Weather from './Weather'
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-//date stamp
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import { formatRelative } from "date-fns";
-import "@reach/combobox/styles.css";
 
+import { formatRelative } from "date-fns";
 import '../index.css'
+
+
 //Map props we need for map UI
 const libraries = [ "places" ];
 const mapContainerStyle = {
@@ -136,7 +123,10 @@ export default function Pin() {
             </div>
           </InfoWindow>
 
-        ) : null}
+
+
+        ) : null }
+
       </GoogleMap>
     </div>
   )

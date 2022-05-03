@@ -3,7 +3,6 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
-import usePlacesAutocomplete from "use-places-autocomplete";
 
 export default function AutoComplete(){
   const [address, setAddress] = React.useState("");

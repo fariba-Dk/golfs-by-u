@@ -16,7 +16,19 @@ import "@reach/combobox/styles.css";
 
 import '../index.css'
 
-export default function Search({ panTo }) {
+export default function Search() {
+
+
+  const mapRef = React.useRef();
+  
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
   const {
     ready,
     value,
@@ -36,6 +48,7 @@ export default function Search({ panTo }) {
     setValue(e.target.value);
   };
 
+
   const handleSelect = async (address) => {
     setValue(address, false);
     clearSuggestions();
@@ -51,7 +64,7 @@ export default function Search({ panTo }) {
 
   return (
     <div className="search">
-      {/* <Combobox onSelect={handleSelect}>
+      <Combobox onSelect={handleSelect}>
         <ComboboxInput
           value={value}
           onChange={handleInput}
@@ -67,7 +80,7 @@ export default function Search({ panTo }) {
               ))}
           </ComboboxList>
         </ComboboxPopover>
-      </Combobox> */}
+      </Combobox>
     </div>
   );
 }

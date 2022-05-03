@@ -1,7 +1,6 @@
 import { alpha, makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles( ( theme ) => ( {
-  //all css is here - theme => colors
+export default makeStyles((theme) => ({
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
