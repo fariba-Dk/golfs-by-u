@@ -8,63 +8,57 @@ import List from './components/courses/CourseList';
 import Map from './components/map/Map';
 
 const App = () => {
-  const [type, setType] = useState('courses');
-  const [rating, setRating] = useState('');
+  const [ type, setType ] = useState( 'courses' );
+  const [ rating, setRating ] = useState( '' );
 
-  const [coords, setCoords] = useState({});
-  const [ bounds, setBounds ] = useState( null );
+  const [ coords, setCoords ] = useState( {} );
+  const [ radius, setRadius ] = useState( );
+
 
   const [ golfCourses, setGolfCourses ] = useState( {} )
   const [ courseDetails, setCourseDetails ] = useState( {} )
 
-  const [ weatherData, setWeatherData ] = useState( [] );
+  const [ filteredCourses, setFilteredCourses ] = useState( [] );
+  const [ courses, setCourses ] = useState( [] );
 
-  const [filteredCourses, setFilteredCourses] = useState([]);
-  const [courses, setCourses] = useState([]);
+  const [ autocomplete, setAutocomplete ] = useState( null );
+  const [ childClicked, setChildClicked ] = useState( null );
+  const [ isLoading, setIsLoading ] = useState( false );
 
-  const [autocomplete, setAutocomplete] = useState(null);
-  const [childClicked, setChildClicked] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  //this sets the user's location RIGHT WHEN
+  useEffect( () => {
+    navigator.geolocation.getCurrentPosition( ( { coords: { latitude, longitude } } ) => {
+      setCoords( { lat: latitude, lng: longitude } );
+    } );
+  }, [] );
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      setCoords({ lat: latitude, lng: longitude });
-    });
-  }, []);
+  useEffect( () => {
+    const filtered = courses.filter( ( course ) => Number( course.rating ) > rating );
 
-  useEffect(() => {
-    const filtered = courses.filter((course) => Number(course.rating) > rating);
+    setFilteredCourses( filtered );
+  }, [ type ] );
 
-    setFilteredCourses(filtered);
-  }, [rating]);
+  useEffect( () => {
+    if ( radius ) {
+      setIsLoading( true );
 
-  useEffect(() => {
-    if (bounds) {
-      setIsLoading(true);
-
-      getWeatherData(coords.lat, coords.lng)
-        .then( ( data ) => setWeatherData( data ) );
-
-      getGolfCourses( coords.lat, coords.lng )
-      .then((data)=>setGolfCourses(data))
-
-      getGolfCourses(type, bounds.sw, bounds.ne)
-        .then((data) => {
-          setCourses(data.filter((course) => course.name && course.num_reviews > 0));
-          setFilteredCourses([]);
-          setRating('');
-          setIsLoading(false);
-        });
+      getGolfCourses( radius, String(coords.lat), String(coords.lng ))//getGolfCourses = async (radius, lat, lng)
+        .then( ( data ) => {
+          console.log( data, coords )
+          setCourses( data.filter( ( course ) => course.name && course.num_reviews > 0 ) );
+          setFilteredCourses( [] );
+          setRating( '' );
+          setIsLoading( false );
+        } ).catch( err => console.log( err ) )
     }
-  }, [bounds, type]);
+  }, [])
 
   const onLoad = (autoC) => setAutocomplete(autoC);
 
   const onPlaceChanged = (latLng) => {
     console.log('App.onPlaceChange', latLng)
-    // const lat = autocomplete.getPlace().geometry.location.lat();
-
-    // const lng = autocomplete.getPlace().geometry.location.lng();
+    // const lat = autocomplete.getGolfCourses().geometry.location.lat();
+    // const lng = autocomplete.getGolfCourses().geometry.location.lng();
 
     setCoords( {lat:latLng.lat, lng:latLng.lng } );
   };
@@ -89,11 +83,11 @@ const App = () => {
         <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Map
             setChildClicked={setChildClicked}
-            setBounds={setBounds}
+            setRadius={setRadius}
             setCoords={setCoords}
             coords={coords}
             courses={filteredCourses.length ? filteredCourses : courses}
-            weatherData={weatherData}
+
           />
         </Grid>
       </Grid>

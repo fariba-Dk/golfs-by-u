@@ -13,13 +13,10 @@ import '../../index.css'
 import mapStyles from './mapStyle';
 import useStyles from './mapStyle.js';
 
-const center = {
-  lat: 32.905431,
-  lng: -117.243229,
-};
+
 const libraries = [ "places" ];
 
-const Map = ({ coords, setCoords, setBounds, setChildClicked, weatherData }) => {
+const Map = ({ coords, setCoords, setRadius, setChildClicked }) => {
   //const matches = React.useMediaQuery('(min-width:600px)');
   const classes = useStyles();
   const [ selected, setSelected ] = React.useState( null );
@@ -38,7 +35,7 @@ const Map = ({ coords, setCoords, setBounds, setChildClicked, weatherData }) => 
 
     const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(12);
+    mapRef.current.setZoom(14);
   }, []);
 
     const onMapClick = React.useCallback((e, lat, lng) => {
@@ -62,13 +59,17 @@ const Map = ({ coords, setCoords, setBounds, setChildClicked, weatherData }) => 
     <div className={classes.mapContainer}>
       <GoogleMapReact
       //bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
-        defaultCenter={ center }
+        defaultCenter={ coords }
         id="map"
         center={coords}
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
-        options={{ disableDefaultUI: true, zoomControl: true, styles: mapStyles }}
-        onClick={ onMapClick }
+        options={''}
+        // onClick={ onMapClick }
+        onChange={ ( e ) => {
+            setCoords( { lat: e.center.lat, lng: e.center.lng } )
+          } }
+
         onChildClick={(child) => setChildClicked(child)}
       >
         { courses.map( ( course) => (
