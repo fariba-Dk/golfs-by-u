@@ -4,7 +4,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 
-export default function AutoComplete(){
+export default function AutoComplete({ onPlaceChanged, onLoad }){
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
@@ -12,10 +12,15 @@ export default function AutoComplete(){
   });
 
   const handleSelect = async value => {
-    const results = await geocodeByAddress(value);
-    const latLng = await getLatLng(results[0]);
-    setAddress(value);
-    setCoordinates(latLng);
+    try {
+      const results = await geocodeByAddress( value );
+      const latLng = await getLatLng( results[ 0 ] );
+      setAddress( value );
+      setCoordinates( latLng );
+      onPlaceChanged( latLng );
+    } catch ( err ) {
+      console.log(err)
+    }
   };
 
   return (

@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { CssBaseline, Grid } from '@material-ui/core';
-import { getWeatherData } from './api'
-import { getGolfCourses, getCourseDetails } from './api';
+import { getWeatherData } from './API-CALLS/api'
+import { getGolfCourses, getCourseDetails } from './API-CALLS/api';
 import Header from './components/Header';
 import List from './components/CourseList';
 import Map from './components/Map';
@@ -60,12 +60,15 @@ const App = () => {
 
   const onLoad = (autoC) => setAutocomplete(autoC);
 
-  const onPlaceChanged = () => {
-    const lat = autocomplete.getPlace().geometry.location.lat();
-    const lng = autocomplete.getPlace().geometry.location.lng();
+  const onPlaceChanged = (latLng) => {
+    console.log('App.onPlaceChange', latLng)
+    // const lat = autocomplete.getPlace().geometry.location.lat();
 
-    setCoords({ lat, lng });
+    // const lng = autocomplete.getPlace().geometry.location.lng();
+
+    setCoords( {lat:latLng.lat, lng:latLng.lng } );
   };
+
 
   return (
     <>

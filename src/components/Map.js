@@ -41,12 +41,13 @@ const Map = ({ coords, setCoords, setBounds, setChildClicked, weatherData }) => 
     mapRef.current.setZoom(12);
   }, []);
 
-    const onMapClick = React.useCallback((e) => {
-      setPlaces((current) => [
+    const onMapClick = React.useCallback((e, lat, lng) => {
+
+      setSelected( ( current ) => [
         ...current,
         {
-          lat: e.latLng.lat(),
-          lng: e.latLng.lng(),
+          lat: e.lat(),
+          lng: e.lng(),
           time: new Date(),
         },
       ]);
@@ -61,8 +62,8 @@ const Map = ({ coords, setCoords, setBounds, setChildClicked, weatherData }) => 
     <div className={classes.mapContainer}>
       <GoogleMapReact
       //bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
-          defaultCenter={ center }
-          id="map"
+        defaultCenter={ center }
+        id="map"
         center={coords}
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
