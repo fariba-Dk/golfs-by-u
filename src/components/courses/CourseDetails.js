@@ -1,7 +1,7 @@
 import React from 'react'
 import useStyles from './courseDetailsStyle'
 
-const CourseDetails = ({place}) => {
+const CourseDetails = ({course}) => {
 
   const classes = useStyles()
 

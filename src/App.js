@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { CssBaseline, Grid } from '@material-ui/core';
 import { getWeatherData } from './API-CALLS/api'
 import { getGolfCourses, getCourseDetails } from './API-CALLS/api';
-import Header from './components/Header';
-import List from './components/CourseList';
-import Map from './components/Map';
+import Header from './components/header/Header';
+import List from './components/courses/CourseList';
+import Map from './components/map/Map';
 
 const App = () => {
   const [type, setType] = useState('courses');
@@ -20,7 +20,7 @@ const App = () => {
   const [ weatherData, setWeatherData ] = useState( [] );
 
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [places, setPlaces] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   const [autocomplete, setAutocomplete] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
@@ -33,7 +33,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = places.filter((place) => Number(place.rating) > rating);
+    const filtered = courses.filter((course) => Number(course.rating) > rating);
 
     setFilteredCourses(filtered);
   }, [rating]);
@@ -50,7 +50,7 @@ const App = () => {
 
       getGolfCourses(type, bounds.sw, bounds.ne)
         .then((data) => {
-          setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
+          setCourses(data.filter((course) => course.name && course.num_reviews > 0));
           setFilteredCourses([]);
           setRating('');
           setIsLoading(false);
@@ -79,7 +79,7 @@ const App = () => {
           <List
             isLoading={isLoading}
             childClicked={childClicked}
-            places={filteredCourses.length ? filteredCourses : places}
+            courses={filteredCourses.length ? filteredCourses : courses}
             type={type}
             setType={setType}
             rating={rating}
@@ -92,7 +92,7 @@ const App = () => {
             setBounds={setBounds}
             setCoords={setCoords}
             coords={coords}
-            places={filteredCourses.length ? filteredCourses : places}
+            courses={filteredCourses.length ? filteredCourses : courses}
             weatherData={weatherData}
           />
         </Grid>

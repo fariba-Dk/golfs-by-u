@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './Map';
+import Map from '../map/Map';
 import { CssBaseline, Grid } from '@material-ui/core';
 import AutoComplete from './AutoComplete'
 import { AppBar, Toolbar, Typography, InputBase, Box } from '@material-ui/core';

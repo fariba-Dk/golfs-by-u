@@ -9,7 +9,7 @@ import {
 } from "@react-google-maps/api";
 
 import { formatRelative } from "date-fns";
-import '../index.css'
+import '../../index.css'
 import mapStyles from './mapStyle';
 import useStyles from './mapStyle.js';
 
@@ -24,7 +24,7 @@ const Map = ({ coords, setCoords, setBounds, setChildClicked, weatherData }) => 
   const classes = useStyles();
   const [ selected, setSelected ] = React.useState( null );
 
-  const [places, setPlaces] = useState([])
+  const [courses, setCourses] = useState([])
 
    const { isLoaded, loadError } = useLoadScript( {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
@@ -71,14 +71,14 @@ const Map = ({ coords, setCoords, setBounds, setChildClicked, weatherData }) => 
         onClick={ onMapClick }
         onChildClick={(child) => setChildClicked(child)}
       >
-        { places.map( ( place) => (
+        { courses.map( ( course) => (
           <Marker
             className={ classes.markerContainer }
-            lat={ Number( place.latitude ) }
-            lng={ Number( place.longitude ) }
-            key={`${place.lat}-${place.lng}`}
+            lat={ Number( course.latitude ) }
+            lng={ Number( course.longitude ) }
+            key={`${course.lat}-${course.lng}`}
             onClick={() => {
-            setChildClicked(place);
+            setChildClicked(course);
             }}
             icon={{
               icon: '⛳️' ,

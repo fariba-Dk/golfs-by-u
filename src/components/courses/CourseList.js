@@ -3,13 +3,13 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './courseListStyle';
 import CourseDetails from './CourseDetails'
 
-const List = ({ places, type, setType, rating, setRating, childClicked, isLoading }) => {
+const List = ({ courses, type, setType, rating, setRating, childClicked, isLoading }) => {
   const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
-    setElRefs((refs) => Array(places.length).fill().map((_, i) => refs[i] || createRef()));
-  }, [places]);
+    setElRefs((refs) => Array(courses.length).fill().map((_, i) => refs[i] || createRef()));
+  }, [courses]);
 
   return (
     <div className={classes.container}>
@@ -43,9 +43,9 @@ const List = ({ places, type, setType, rating, setRating, childClicked, isLoadin
 
             {/* container */}
           <Grid container spacing={3} className={classes.list}>
-            {places?.map((place, i) => (
+            {courses?.map((course, i) => (
               <Grid ref={elRefs[i]} key={i} item xs={12}>
-                <CourseDetails selected={Number(childClicked) === i} refProp={elRefs[i]} place={place} />
+                <CourseDetails selected={Number(childClicked) === i} refProp={elRefs[i]} course={course} />
               </Grid>
             ))}
           </Grid>
@@ -64,13 +64,13 @@ export default List;
 // import CourseDetails from './CourseDetails'
 
 
-// const CourseList = ({ places, type, setType, rating, setRating, childClicked, isLoading }) => {
+// const CourseList = ({ courses, type, setType, rating, setRating, childClicked, isLoading }) => {
 //   const [elRefs, setElRefs] = useState([]);
 //   const classes = useStyles();
 
 //   useEffect(() => {
-//     setElRefs((refs) => Array(places.length).fill().map((_, i) => refs[i] || createRef()));
-//   }, [places]);
+//     setElRefs((refs) => Array(courses.length).fill().map((_, i) => refs[i] || createRef()));
+//   }, [courses]);
 
 //   return (
 //     <div className={classes.container}>
@@ -106,7 +106,7 @@ export default List;
 //             {/* Container of each card = course details */}
 
 //           <Grid container spacing={3} className={classes.list}>
-//             {places?.map((place, i) => (
+//             {courses?.map((place, i) => (
 //               <Grid ref={elRefs[i]} key={i} item xs={12}>
 //                 <CourseDetails selected={Number(childClicked) === i} refProp={elRefs[i]} place={place} />
 //               </Grid>
