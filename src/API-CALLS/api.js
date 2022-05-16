@@ -22,19 +22,19 @@ export const getGolfCourses = async (lat, lng ) => {
 }
 
 
-//  export const getCourseDetails = async ( radius, lat, lng ) => {
-//   try {
-//       const { data: { data } } = await axios.get( 'https://golf-course-finder.p.rapidapi.com/courses/details', {
-//         // method: 'GET',
-//         params: { lat:lat , lon: lng },
-//         headers: {
-//           'X-RapidAPI-Host': 'golf-course-finder.p.rapidapi.com',
-//           'X-RapidAPI-Key': '11e75caaf7msh15da62401f002e4p1fcd54jsn4c82e75044aa'
-//         }
-//       } )
-//       return data;
-//     }catch ( error ) {
-//     console.log(error)
-//   }
-// }
+ export const getCourseDetails = async ( radius, lat, lng ) => {
+  try {
+      const { data: { data } } = await axios.get( 'https://golf-course-finder.p.rapidapi.com/courses/details', {
+        // method: 'GET',
+        params: { lat:lat , lon: lng },
+        headers: {
+          'X-RapidAPI-Host': 'golf-course-finder.p.rapidapi.com',
+          'X-RapidAPI-Key': '11e75caaf7msh15da62401f002e4p1fcd54jsn4c82e75044aa'
+        }
+      } )
+      return data;
+    }catch ( error ) {
+    console.log(error)
+  }
+}
 

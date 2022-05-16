@@ -72,7 +72,7 @@ app.post("/api/v1/courses", async (req, res) => {
     res.status(201).json({
       status: "success",
       data: {
-        restaurant: results.rows[0],
+        course: results.rows[0],
       },
     });
   } catch (err) {
@@ -102,11 +102,11 @@ app.put("/api/v1/courses/:id", async (req, res) => {
   console.log(req.body);
 });
 
-// Delete Restaurant
+// Delete course
 
 app.delete("/api/v1/courses/:id", async (req, res) => {
   try {
-    const results = db.query("DELETE FROM courses where id = $1", [
+    const result = db.query("DELETE FROM courses where id = $1", [
       req.params.id,
     ]);
     res.status(204).json({
