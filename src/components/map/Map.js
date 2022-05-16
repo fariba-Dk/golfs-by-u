@@ -15,7 +15,7 @@ import useStyles from './mapStyle.js';
 
 
 const libraries = [ "places" ];
-
+//getting props
 const Map = ({ coords, setCoords, setRadius, setChildClicked }) => {
   //const matches = React.useMediaQuery('(min-width:600px)');
   const classes = useStyles();
@@ -115,4 +115,3 @@ const Map = ({ coords, setCoords, setRadius, setChildClicked }) => {
 };
 
 export default Map;
-

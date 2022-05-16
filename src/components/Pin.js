@@ -30,7 +30,7 @@ export default function Pin() {
 
   //react google hook to load api
   const { isLoaded, loadError } = useLoadScript( {
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+    // googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     libraries,
   } );
 
