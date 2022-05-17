@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { CssBaseline, Grid } from '@material-ui/core';
-import { getWeatherData } from './API-CALLS/api'
-import { getGolfCourses, getCourseDetails } from './API-CALLS/api';
+import { getGolfCoursesData, getCourseDetailsData } from './API-CALLS/api';
 import Header from './components/header/Header';
 import List from './components/courses/CourseList';
 import Map from './components/map/Map';
@@ -41,7 +40,7 @@ const App = () => {
     if ( radius ) {
       setIsLoading( true );
 
-      getGolfCourses( radius, String(coords.lat), String(coords.lng ))//getGolfCourses = async (radius, lat, lng)
+      getGolfCoursesData( radius, String(coords.lat), String(coords.lng ))//getGolfCourses = async (radius, lat, lng)
         .then( ( data ) => {
           console.log( data, coords )
           setCourses( data.filter( ( course ) => course.name && course.num_reviews > 0 ) );

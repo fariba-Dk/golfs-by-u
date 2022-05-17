@@ -7,7 +7,7 @@ const CourseDetails = ({course}) => {
 
   return (
     <h1>
-      Course
+      {course.name}
     </h1>
   )
 }

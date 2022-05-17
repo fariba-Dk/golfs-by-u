@@ -3,13 +3,27 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './courseListStyle';
 import CourseDetails from './CourseDetails'
 
-const List = ({ courses, type, setType, rating, setRating, childClicked, isLoading }) => {
+const List = ({rating, setRating, childClicked, isLoading }) => {
   const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
+  const [ type, setType ] = useState( 'courses' )
+
+
+  const courses = [
+    {name: 'course-1'},
+    {name: 'course-2'},
+    { name: 'course-3' },
+    {name: 'course-4'},
+    {name: 'course-5'},
+    {name: 'course-6'}
+  ]
+
+  // src/components/courses/CourseList.js
+  // Line 10:9:  The 'courses' array makes the dependencies of useEffect Hook (at line 20) change on every render. To fix this, wrap the initialization of 'courses' in its own useMemo() Hook  react-hooks/exhaustive-deps
 
   useEffect(() => {
     setElRefs((refs) => Array(courses.length).fill().map((_, i) => refs[i] || createRef()));
-  }, [courses]);
+  }, []);
 
   return (
     <div className={classes.container}>

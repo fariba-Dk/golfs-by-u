@@ -7,8 +7,6 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-
-import { formatRelative } from "date-fns";
 import '../../index.css'
 import useStyles from './mapStyle.js';
 
