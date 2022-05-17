@@ -22,7 +22,7 @@ export const getGolfCourses = async (lat, lng ) => {
 }
 
 
- export const getCourseDetails = async ( radius, lat, lng ) => {
+ export const getCourseDetails = async ( lat, lng ) => {
   try {
       const { data: { data } } = await axios.get( 'https://golf-course-finder.p.rapidapi.com/courses/details', {
         // method: 'GET',

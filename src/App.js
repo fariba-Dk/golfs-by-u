@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { CssBaseline, Grid } from '@material-ui/core';
 import { getWeatherData } from './API-CALLS/api'
