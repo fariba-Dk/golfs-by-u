@@ -35,6 +35,7 @@ courses table:
   3 | penmar              | venice_beach CA |         9 | Just blocks from Venice Beach, this executive length course is the perfect track to hone your short game skills. With six par 4s and three par 3s. Penmar was rated “Best Nine Hole Golf Course” by Los Angeles Magazine! |            | t
 (3 rows)
 
+review table
 
 
 ~~~~~~~~~~~~~~~ user_player table ~~~~~~~~~~~~~~~~~
@@ -76,4 +77,6 @@ user_player table:
 (2 rows)
 
 
+courses-id: place it what i need to identify
 
+//take the zips and send each 

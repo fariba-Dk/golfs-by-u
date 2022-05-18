@@ -10,18 +10,16 @@ import {
 import '../../index.css'
 import useStyles from './mapStyle.js';
 
+ // parse = require('node-html-parser');
 
 const libraries = [ "places" ];
 //getting props
-const Map = ({ coords, setCoords, setRadius, setChildClicked }) => {
+const Map = ({ coords, setCoords, setChildClicked }) => {
   //const matches = React.useMediaQuery('(min-width:600px)');
   const classes = useStyles();
-  const [ selected, setSelected ] = React.useState( null );
-
-  const [courses, setCourses] = useState([])
 
    const { isLoaded, loadError } = useLoadScript( {
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+  googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     libraries,
    } );
 
@@ -40,7 +38,7 @@ const Map = ({ coords, setCoords, setRadius, setChildClicked }) => {
         margin={[50, 50, 50, 50]}
         options={''}
         // onClick={ onMapClick }
-        onChange={ ( e ) => {
+          onChange={ ( e ) => {
             setCoords( { lat: e.center.lat, lng: e.center.lng } )
           } }
         onChildClick={(child) => setChildClicked(child)}

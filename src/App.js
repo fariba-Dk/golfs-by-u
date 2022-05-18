@@ -6,14 +6,16 @@ import List from './components/courses/CourseList';
 import Map from './components/map/Map';
 
 const App = () => {
+  //not sure if I'll use this
   const [ type, setType ] = useState( 'courses' );
   const [ rating, setRating ] = useState( '' );
 
+//to set coords on auto
   const [ coords, setCoords ] = useState( {} );
-  const [ radius, setRadius ] = useState( );
+  const [ radius, setRadius ] = useState( '5' );
 
-
-  const [ golfCourses, setGolfCourses ] = useState( {} )
+// golf course hooks
+  const [ golfCourses, setGolfCourses ] = useState( [] )
   const [ courseDetails, setCourseDetails ] = useState( {} )
 
   const [ filteredCourses, setFilteredCourses ] = useState( [] );
@@ -23,6 +25,8 @@ const App = () => {
   const [ childClicked, setChildClicked ] = useState( null );
   const [ isLoading, setIsLoading ] = useState( false );
 
+
+
   //this sets the user's location RIGHT WHEN
   useEffect( () => {
     navigator.geolocation.getCurrentPosition( ( { coords: { latitude, longitude } } ) => {
@@ -30,37 +34,26 @@ const App = () => {
     } );
   }, [] );
 
-  useEffect( () => {
-    const filtered = courses.filter( ( course ) => Number( course.rating ) > rating );
-
-    setFilteredCourses( filtered );
-  }, [ type ] );
-
-  useEffect( () => {
-    if ( radius ) {
-      setIsLoading( true );
-
-      getGolfCoursesData( radius, String(coords.lat), String(coords.lng ))//getGolfCourses = async (radius, lat, lng)
+  const onPlaceChanged = (coords) => {
+    setCoords( coords );
+    if ( coords.lat && coords.lng && radius ) {
+      setIsLoading( true )//display loading
+      getGolfCoursesData( radius, coords.lat, coords.lng )
         .then( ( data ) => {
-          console.log( data, coords )
-          setCourses( data.filter( ( course ) => course.name && course.num_reviews > 0 ) );
-          setFilteredCourses( [] );
-          setRating( '' );
-          setIsLoading( false );
-        } ).catch( err => console.log( err ) )
+          console.log( 'this is data in App.js component', data )
+          setGolfCourses(data.courses)
+        })
+        .catch( (err)=>
+          console.log( err ) )
+       .finally(() => {
+      setIsLoading(false);//once loaded it sets to false
+  });
     }
-  }, [])
+  };
+  //different method
+
 
   const onLoad = (autoC) => setAutocomplete(autoC);
-
-  const onPlaceChanged = (latLng) => {
-    console.log('App.onPlaceChange', latLng)
-    // const lat = autocomplete.getGolfCourses().geometry.location.lat();
-    // const lng = autocomplete.getGolfCourses().geometry.location.lng();
-
-    setCoords( {lat:latLng.lat, lng:latLng.lng } );
-  };
-
 
   return (
     <>
@@ -71,7 +64,7 @@ const App = () => {
           <List
             isLoading={isLoading}
             childClicked={childClicked}
-            courses={filteredCourses.length ? filteredCourses : courses}
+            courses={golfCourses}
             type={type}
             setType={setType}
             rating={rating}

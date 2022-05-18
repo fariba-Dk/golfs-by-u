@@ -4,7 +4,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 
-export default function AutoComplete({ onPlaceChanged, onLoad }){
+export default function AutoComplete({ onPlaceChanged, onLoad, getGolfCoursesData }){
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
@@ -18,6 +18,7 @@ export default function AutoComplete({ onPlaceChanged, onLoad }){
       setAddress( value );
       setCoordinates( latLng );
       onPlaceChanged( latLng );
+      
     } catch ( err ) {
       console.log(err)
     }
