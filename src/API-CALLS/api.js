@@ -16,23 +16,34 @@ export const getGolfCoursesData = async (radius = 5, lat, lng) => {
 
 
 
-export const getCourseDetailsData = async ( { courseAdd, phone, name, rating, url, website, img, zip } ) => {
+export const getCourseDetailsData = async ( name, zip_code ) => {
   const { courseDetail } = await axios.get( 'https://golf-course-finder.p.rapidapi.com/course/details', {
 
     params: {
       name: name,
-      zip: zip,
+      zip: zip_code,
     },
     headers: {
       'X-RapidAPI-Host': 'golf-course-finder.p.rapidapi.com',
       'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_GETGOLF_API_KEY
     }
   } )
-  console.log(getCourseDetailsData)
+  console.log('000course details', courseDetail)
  return courseDetail
 }
 
+export const getWeatherData = async (lat, lng) => {
 
+      const { data } = await axios.get('https://community-open-weather-map.p.rapidapi.com/find', {
+        params: { lat, lng },
+        headers: {
+          'x-rapidapi-key': process.env.REACT_APP_RAPID_API_WEATHER_API_KEY,
+          'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
+        },
+      });
+console.log('whether here s', data)
+      return data;
+  };
 
 
 

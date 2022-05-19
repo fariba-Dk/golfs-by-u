@@ -14,7 +14,7 @@ import useStyles from './mapStyle.js';
 
 const libraries = [ "places" ];
 //getting props
-const Map = ({ coords, setCoords, setChildClicked }) => {
+const Map = ({ coords, setCoords, setChildClicked, courses,details}) => {
   //const matches = React.useMediaQuery('(min-width:600px)');
   const classes = useStyles();
 
@@ -42,7 +42,18 @@ const Map = ({ coords, setCoords, setChildClicked }) => {
             setCoords( { lat: e.center.lat, lng: e.center.lng } )
           } }
         onChildClick={(child) => setChildClicked(child)}
-      >
+        >{ courses?.map( ( course, i ) =>
+          <div
+            className={ classes.markerContainer }
+            lat={ Number(course.latitude) }
+            lng={ Number( course.longitude ) }
+            key={i}
+          >
+            <Paper elevation={ 3 } className={ classes.paper }>
+              <Typography className={ classes.typography } varient="subtitle2" gutterBottom>{ course.name }</Typography>
+              <image className={classes.pointer} src={course.photo ? course.photo.images.large.url : 'https://cdn.pixabay.com/photo/2015/06/21/15/03/jamaica-816669_1280.jpg'} alt={course.name}
+            /></Paper>
+          </div> ) }
       </GoogleMapReact>
       </div>
    </>

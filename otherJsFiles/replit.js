@@ -1,77 +1,35 @@
 
-import React, { useEffect, useState } from 'react';
-import './App.css';
+  useEffect(() => {
+    const filtered = places.filter((place) => Number(place.rating) > rating);
 
-function App() {
-  const [list, setList] = useState([]);
-  return(
-    <>
-    </>
-  )
-}
-
-
-// Next, import the service, then call the service inside your useEffect Hook. Update the list with setList if the component is mounted. To understand why you should check if the component is mounted before setting the data, see Step 2 — Preventing Errors on Unmounted Components in How To Handle Async Data Loading, Lazy Loading, and Code Splitting with React.
-
-// Currently you are only running the effect once when the page loads, so the dependency array will be empty. In the next step, you’ll trigger the effect based on different page actions to ensure that you always have the most up-to-date information.
-
-// Add the following highlighted code:
-
-import { getList } from '../../services/list';
-
-function App() {
-  const [list, setList] = useState([]);
+    setFilteredPlaces(filtered);
+  }, [rating]);
 
   useEffect(() => {
-   let mounted = true;
-   getList()
-     .then(items => {
-       if(mounted) {
-         setList(items)
-       }
-     })
-   return () => mounted = false;
- }, [])
+    if (bounds) {
+      setIsLoading(true);
 
-  return(
-    <>
-    </>
-  )
-}
+      getWeatherData(coords.lat, coords.lng)
+        .then((data) => setWeatherData(data));
 
-export default App;
-Finally, loop over the items with .map and display them in a list:
+      getPlacesData(type, bounds.sw, bounds.ne)
+        .then((data) => {
+          setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
+          setFilteredPlaces([]);
+          setRating('');
+          setIsLoading(false);
+        });
+    }
+  }, [bounds, type]);
 
-api-tutorial/src/components/App/App
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import { getList } from '../../services/list';
+  const onLoad = (autoC) => setAutocomplete(autoC);
 
-function App() {
-  const [list, setList] = useState([]);
+  const onPlaceChanged = () => {
+    const lat = autocomplete.getPlace().geometry.location.lat();
+    const lng = autocomplete.getPlace().geometry.location.lng();
 
-  useEffect(() => {
-    let mounted = true;
-    getList()
-      .then(items => {
-        if(mounted) {
-          setList(items)
-        }
-      })
-    return () => mounted = false;
-  }, [])
-
-  return(
-    <div className="wrapper">
-     <h1>My Grocery List</h1>
-     <ul>
-       {list.map(item => <li key={item.item}>{item.item}</li>)}
-     </ul>
-   </div>
-  )
-}
-
-export default App;
+    setCoords({ lat, lng });
+  };
 
 // let cc = console.log
 

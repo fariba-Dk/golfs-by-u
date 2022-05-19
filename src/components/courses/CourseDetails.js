@@ -1,21 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip } from '@material-ui/core';
 //import LocationOnIcon from '@material-ui/icons/LocationOn';
 import useStyles from './courseDetailsStyle'
+import { getGolfCoursesData, getCourseDetailsData, getWeatherData } from '../../API-CALLS/api';
 
 
 const CourseDetails = ( { course, selected, refProp } ) => {
   if ( selected ) {
-    refProp?.current?.scrollIntoView({behavior:"smooth", block:'start'})
+    refProp?.current?.scrollIntoView( { behavior: "smooth", block: 'start' } )
+
   }
 //courses.name  courses.zip_code  courses.distance
   const classes = useStyles()
+  useEffect( () => {
+
+    }, [])
+
+  useEffect( () => {
+  })
 
   return (
         <Card elevation={6}>
       <CardMedia
         style={{ height: 350 }}
-        image={ course.photo ? course.photo.images.large.url :'https://www.gettyimages.com/photos/golf-course-no-people?assettype=image&sort=mostpopular&phrase=golf%20course%20no%20people&license=rf%2Crm&servicecontext=srp-related'}
+        image={ course.photo ? course.photo.images.large.url : 'https://cdn.pixabay.com/photo/2015/06/21/15/03/jamaica-816669_1280.jpg'}
         title={course.name}
       />
       <CardContent>
