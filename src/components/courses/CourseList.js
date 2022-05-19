@@ -2,12 +2,13 @@ import React, { useState, useEffect, createRef } from 'react';
 import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 import useStyles from './courseListStyle';
 import CourseDetails from './CourseDetails'
+import { getGolfCoursesData, getCourseDetailsData, getWeatherData } from '../../API-CALLS/api';
 
-const List = ({courses, rating, setRating, childClicked, isLoading }) => {
+const List = ({course,courses, rating, setRating, childClicked, isLoading }) => {
   const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
   const [ type, setType ] = useState( 'courses' )
-
+  const [ details, setDetails ] = useState( {} );
 
   // src/components/courses/CourseList.js
   // Line 10:9:  The 'courses' array makes the dependencies of useEffect Hook (at line 20) change on every render. To fix this, wrap the initialization of 'courses' in its own useMemo() Hook  react-hooks/exhaustive-deps
@@ -16,6 +17,13 @@ const List = ({courses, rating, setRating, childClicked, isLoading }) => {
     setElRefs((refs) => Array(courses.length).fill().map((_, i) => refs[i] || createRef()));
   }, []);
 
+    useEffect( () => {
+    getCourseDetailsData(course)
+    .then( (details) => {
+      setDetails(details)
+});
+    }, [ course ] )
+  
   return (
     <div className={classes.container}>
       <Typography variant="h4">Golf Courses around you</Typography>

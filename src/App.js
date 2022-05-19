@@ -15,7 +15,7 @@ const App = () => {
   // golf course hooks
   const [ details, setDetails ] = useState( {} )
   const [ courses, setCourses ] = useState( [] );
-  const [ weather, setWeather ] = useState()
+ 
 
   const [ autocomplete, setAutocomplete ] = useState( null );
   const [ childClicked, setChildClicked ] = useState( null );

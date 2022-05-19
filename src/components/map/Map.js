@@ -34,7 +34,7 @@ const Map = ({ coords, setCoords, setChildClicked, courses,details}) => {
         defaultCenter={ coords }
         id="map"
         center={coords}
-        defaultZoom={14}
+        defaultZoom={12}
         margin={[50, 50, 50, 50]}
         options={''}
         // onClick={ onMapClick }

@@ -8,22 +8,25 @@ import { getGolfCoursesData, getCourseDetailsData, getWeatherData } from '../../
 const CourseDetails = ( { course, selected, refProp } ) => {
   if ( selected ) {
     refProp?.current?.scrollIntoView( { behavior: "smooth", block: 'start' } )
-
   }
-//courses.name  courses.zip_code  courses.distance
+
   const classes = useStyles()
-  useEffect( () => {
 
-    }, [])
+  // The path "../../" might not be correct
 
-  useEffect( () => {
-  })
+  const [ weather, setWeather ] = useState(0)
+
+
+
+// image={ details ? details.whatever_the_url_xxxxxxx : 'https://www.gettyimages.com/phot
 
   return (
         <Card elevation={6}>
       <CardMedia
-        style={{ height: 350 }}
-        image={ course.photo ? course.photo.images.large.url : 'https://cdn.pixabay.com/photo/2015/06/21/15/03/jamaica-816669_1280.jpg'}
+        style={ { height: 350 } }
+        image={ course.photo ? course.photo.images.large.url : 'https://images.squarespace-cdn.com/content/v1/5a8c9ed1d55b410cece9c9a0/1568236242518-8URRECJK2GRGY6I5UABU/PebbleBeachGolfLinks%2307_KingTide.jpg'}
+
+        //image={ details ? details.course_details.result.photos[0].large.url : 'https://cdn.pixabay.com/photo/2015/06/21/15/03/jamaica-816669_1280.jpg'}
         title={course.name}
       />
       <CardContent>
