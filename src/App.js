@@ -6,26 +6,19 @@ import List from './components/courses/CourseList';
 import Map from './components/map/Map';
 
 const App = () => {
-  //not sure if I'll use this
-  const [ type, setType ] = useState( 'courses' );
-  const [ rating, setRating ] = useState( '' );
 
 //to set coords on auto
   const [ coords, setCoords ] = useState( {} );
   const [ radius, setRadius ] = useState( '5' );
+  const [ type, setType ] = useState( 'courses' );
 
 // golf course hooks
-  const [ golfCourses, setGolfCourses ] = useState( [] )
   const [ courseDetails, setCourseDetails ] = useState( {} )
-
-  const [ filteredCourses, setFilteredCourses ] = useState( [] );
   const [ courses, setCourses ] = useState( [] );
 
   const [ autocomplete, setAutocomplete ] = useState( null );
   const [ childClicked, setChildClicked ] = useState( null );
   const [ isLoading, setIsLoading ] = useState( false );
-
-
 
   //this sets the user's location RIGHT WHEN
   useEffect( () => {
@@ -41,7 +34,7 @@ const App = () => {
       getGolfCoursesData( radius, coords.lat, coords.lng )
         .then( ( data ) => {
           console.log( 'this is data in App.js component', data )
-          setGolfCourses(data.courses)
+          setCourses(data.courses)
         })
         .catch( (err)=>
           console.log( err ) )
@@ -50,9 +43,7 @@ const App = () => {
   });
     }
   };
-  //different method
-
-
+  
   const onLoad = (autoC) => setAutocomplete(autoC);
 
   return (
@@ -64,11 +55,9 @@ const App = () => {
           <List
             isLoading={isLoading}
             childClicked={childClicked}
-            courses={golfCourses}
+            courses={courses}
             type={type}
             setType={setType}
-            rating={rating}
-            setRating={setRating}
           />
         </Grid>
         <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -77,8 +66,6 @@ const App = () => {
             setRadius={setRadius}
             setCoords={setCoords}
             coords={coords}
-            courses={filteredCourses.length ? filteredCourses : courses}
-
           />
         </Grid>
       </Grid>

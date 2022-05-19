@@ -4,7 +4,6 @@ export const hostUrl ='https://golf-course-finder.p.rapidapi.com'
 
 //get list of courses from rapid api   Rancho park =>Latitude: 34.0454302 Longitude: -118.4206915
 export const getGolfCoursesData = async (radius = 5, lat, lng) => {
-
   const { data } = await axios.get( 'https://golf-course-finder.p.rapidapi.com/courses', {
     params: {radius, lat, lng},
      headers: {
@@ -12,27 +11,27 @@ export const getGolfCoursesData = async (radius = 5, lat, lng) => {
       'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_GETGOLF_API_KEY
     }
   } )
-  console.log( 'this is data from api', data )
   return data
-  }
+}
 
 
-//get course details
-const courseDetails = {
-  method: 'GET',
-  url: 'https://golf-course-finder.p.rapidapi.com/course/details',
-  params: {zip: '90066', name:'rancho park'},
-  headers: {
-    'X-RapidAPI-Host': 'golf-course-finder.p.rapidapi.com',
-    'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_GETGOLF_API_KEY//
-  }
-};
 
-export const getCourseDetailsData = axios.request(courseDetails).then(function (response) {
-	console.log('course-details from api', response.data);
-}).catch(function (error) {
-	console.error(error);
-});
+export const getCourseDetailsData = async ( { courseAdd, phone, name, rating, url, website, img, zip } ) => {
+  const { courseDetail } = await axios.get( 'https://golf-course-finder.p.rapidapi.com/course/details', {
+
+    params: {
+      name: name,
+      zip: zip,
+    },
+    headers: {
+      'X-RapidAPI-Host': 'golf-course-finder.p.rapidapi.com',
+      'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_GETGOLF_API_KEY
+    }
+  } )
+  console.log(getCourseDetailsData)
+ return courseDetail
+}
+
 
 
 
