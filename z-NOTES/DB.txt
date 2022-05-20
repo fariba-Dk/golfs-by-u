@@ -79,4 +79,15 @@ user_player table:
 
 courses-id: place it what i need to identify
 
-//take the zips and send each 
+//take the zips and send each
+
+//Client ID
+dA3nHHxrhYpWluuMNRzn8Q
+
+API Key
+2U6IwI-rE6a_ljPDZCNgmisaFwvuRSKrDufSlH0LrBfGJr-DPuo2KjQ5U2LwuD2xa5JFRgLBFp9VK6PAqfjx52hLxoGskJsdlbH8TwEhtCMuqFwvdewXzKV3fKHQYHYx
+
+
+App Name
+golfs-by-u
+App Website

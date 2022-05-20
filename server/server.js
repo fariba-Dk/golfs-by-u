@@ -1,27 +1,30 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const db = require("./db");
-
-
+const express = require('express');
+const cors = require('cors');
 const app = express();
+
+const db = require('./db');
+require('dotenv').config()
+
 
 app.use(cors());
 app.use(express.json());
 
 // Get all courses
-app.get("/api/v1/courses", async (req, res) => {
+app.get( "/api/v1/courses", async ( req, res ) => {
+
   try {
     //const results = await db.query("select * from courses");
-    const courseRatingData = await db.query(
-      "select * from courses left join (select course_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by course_id) reviews on courses.id = reviews.course_id;"
+    const coursedescriptionData = await db.query(
+      "select * from courses"
+      // left join (select course_id, COUNT(*), TRUNC(AVG(description),1) as average_description from reviews group by course_id) reviews on courses.id = reviews.course_id;"
     );
 
     res.status(200).json({
       status: "success",
-      results: courseRatingData.rows.length,
+      results: coursedescriptionData.rows.length,
       data: {
-        courses: courseRatingData.rows,
+        // courses:['taco','wendy']
+        courses: coursedescriptionData.rows,
       },
     });
   } catch (err) {
@@ -35,7 +38,7 @@ app.get("/api/v1/courses/:id", async (req, res) => {
 
   try {
     const course = await db.query(
-      "select * from courses left join (select courses_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by course_id) reviews on courses.id = reviews.course_id where id = $1",
+      "select * from courses left join (select courses_id, COUNT(*), TRUNC(AVG(description),1) as average_description from reviews group by course_id) reviews on courses.id = reviews.course_id where id = $1",
       [req.params.id]
     );
     // select * from courses wehre id = req.params.id
@@ -65,8 +68,8 @@ app.post("/api/v1/courses", async (req, res) => {
 
   try {
     const results = await db.query(
-      "INSERT INTO courses (name, location, price_range) values ($1, $2, $3) returning *",
-      [req.body.name, req.body.location, req.body.price_range]
+      "INSERT INTO courses (name, location, num_holes) values ($1, $2, $3) returning *",
+      [req.body.name, req.body.location, req.body.num_holes]
     );
     console.log(results);
     res.status(201).json({
@@ -85,8 +88,8 @@ app.post("/api/v1/courses", async (req, res) => {
 app.put("/api/v1/courses/:id", async (req, res) => {
   try {
     const results = await db.query(
-      "UPDATE courses SET name = $1, location = $2, price_range = $3 where id = $4 returning *",
-      [req.body.name, req.body.location, req.body.price_range, req.params.id]
+      "UPDATE courses SET name = $1, location = $2, num_holes = $3 where id = $4 returning *",
+      [req.body.name, req.body.location, req.body.num_holes, req.params.id]
     );
 
     res.status(200).json({
@@ -110,7 +113,7 @@ app.delete("/api/v1/courses/:id", async (req, res) => {
       req.params.id,
     ]);
     res.status(204).json({
-      status: "sucess",
+      status: "success",
     });
   } catch (err) {
     console.log(err);
@@ -120,8 +123,8 @@ app.delete("/api/v1/courses/:id", async (req, res) => {
 app.post("/api/v1/courses/:id/addReview", async (req, res) => {
   try {
     const newReview = await db.query(
-      "INSERT INTO reviews (course_id, name, review, rating) values ($1, $2, $3, $4) returning *;",
-      [req.params.id, req.body.name, req.body.review, req.body.rating]
+      "INSERT INTO reviews (course_id, title, review, description) values ($1, $2, $3, $4) returning *;",
+      [req.params.id, req.body.title, req.body.review, req.body.description]
     );
     console.log(newReview);
     res.status(201).json({
@@ -135,7 +138,7 @@ app.post("/api/v1/courses/:id/addReview", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3009;
 app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);
 });

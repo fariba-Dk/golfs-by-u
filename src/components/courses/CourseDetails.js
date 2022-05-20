@@ -21,7 +21,8 @@ const CourseDetails = ( { course, selected, refProp } ) => {
     getCourseDetailsData( course.name, course.zip )
       .then( ( details ) => {
         setDetails( details )
-      
+        console.log(details, 'this is details --->')
+
         //console.log(details.course_details.result.photos[1])
       } ).catch( ( err ) => {
         console.log( err )

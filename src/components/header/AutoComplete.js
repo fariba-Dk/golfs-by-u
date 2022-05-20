@@ -19,6 +19,7 @@ export default function AutoComplete({ onPlaceChanged, onLoad, getGolfCoursesDat
       setCoordinates( latLng );
       onPlaceChanged( latLng );
       
+
     } catch ( err ) {
       console.log(err)
     }

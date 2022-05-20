@@ -48,11 +48,7 @@ const Map = ({ coords, setCoords, setChildClicked, courses, details, weatherData
             key={i}
           >⛳️</div>
         ) ) }
-               {weatherData?.list?.length && weatherData.list.map((data, i) => (
-          <div key={i} lat={data.coords.lat} lng={data.coords.lng}>
-            <img alt="weather data" src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} height="70px" />
-          </div>
-        ))}
+
       </GoogleMapReact>
       </div>
    </>

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { CssBaseline, Grid } from '@material-ui/core';
-import { getGolfCoursesData, getCourseDetailsData, getWeatherData } from './API-CALLS/api';
+import { getGolfCoursesData, getCourseDetailsData, getWeatherData, yelpGolfCoursesData, BEARER_TOKEN } from './API-CALLS/api';
 import Header from './components/header/Header';
 import List from './components/courses/CourseList';
 import Map from './components/map/Map';
 
-const App = () => {
+import axios from 'axios'
+import { URLSearchParams } from 'url';
+global.URLSearchParams = URLSearchParams
+
+const App = ( term, location ) => {
+
 
   //to set coords on auto
   const [ coords, setCoords ] = useState( {} );
@@ -16,10 +21,12 @@ const App = () => {
   const [ details, setDetails ] = useState( {} )
   const [ courses, setCourses ] = useState( [] );
 
-
   const [ autocomplete, setAutocomplete ] = useState( null );
   const [ childClicked, setChildClicked ] = useState( null );
   const [ isLoading, setIsLoading ] = useState( false );
+
+  //FROM YELP
+   const [params, setParams] = useState({ checked: true });
 
   //this sets the user's location RIGHT WHEN
   useEffect( () => {
@@ -48,7 +55,30 @@ const App = () => {
     }
   }
 
-  const onLoad = (autoC) => setAutocomplete(autoC);
+  const onLoad = ( autoC ) => setAutocomplete( autoC );
+
+
+
+    const [businesses, setBusinesses] = useState([]);
+    const [amountResults, setAmountResults] = useState();
+    const [queryParams, setqueryParams] = useState({});
+
+    useEffect(() => {
+        setBusinesses([]);
+        const fetchData = async () => {
+            try {
+                const rawData = await axios.get('/businesses/search', queryParams);
+                const resp = await rawData.json();
+                setBusinesses(resp.businesses);
+                setAmountResults(resp.total);
+            } catch(e) {
+                console.error(e);
+            }
+         
+        };
+        fetchData();
+    }, [ queryParams ] );
+
 
   return (
     <>
@@ -58,7 +88,8 @@ const App = () => {
         <Grid item xs={12} md={4}>
           <List
             isLoading={isLoading}
-            childClicked={childClicked}
+            childClicked={ childClicked }
+            businesses={businesses}
             courses={courses}
             type={type}
             setType={setType}

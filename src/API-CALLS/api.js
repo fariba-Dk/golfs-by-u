@@ -1,6 +1,29 @@
 import axios from 'axios';//library to make our calls
 
+
+//USING YELP API HERE
+export const API_BASE_URL = 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3';
+export const BEARER_TOKEN = process.env.REACT_APP_YELP_API_KEY
+
+
+export async function yelpGolfCoursesData( path, queryParams ) {
+
+    const {query} = await axios.get(queryParams);
+    return fetch(`${API_BASE_URL}${path}?${query}`, {
+        headers: {
+            Authorization: `Bearer ${BEARER_TOKEN}`,
+            Origin: 'localhost',
+            withCredentials: true,
+        }
+    });
+}
+
+
+
+//USING RAPID API HERE
 export const hostUrl ='https://golf-course-finder.p.rapidapi.com'
+//https://golf-course-finder.p.rapidapi.com/courses
+//e166b0df54msh532b19a567ef28bp162c49jsn72e745713423
 
 //get list of courses from rapid api   Rancho park =>Latitude: 34.0454302 Longitude: -118.4206915
 export const getGolfCoursesData = async (radius = 5, lat, lng) => {
@@ -11,6 +34,7 @@ export const getGolfCoursesData = async (radius = 5, lat, lng) => {
       'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_GETGOLF_API_KEY
     }
   } )
+  console.log(data)
   return data
 }
 
@@ -26,7 +50,7 @@ const apiResult= await axios.get( 'https://golf-course-finder.p.rapidapi.com/cou
       'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_GETGOLF_API_KEY
     }
   } )
-
+console.log(apiResult)
  return apiResult
 }
 

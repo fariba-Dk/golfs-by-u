@@ -1,6 +1,17 @@
-const { Pool } = require("pg");
+//importing the pg library BUT we are destructuring and
+//get an instance of pool
+const Pool = require('pg').Pool;
 
-const pool = new Pool();
-module.exports = {
-  query: (text, params) => pool.query(text, params),
-};
+const db = new Pool({
+  user:"postgres",
+  password:"allbetter",
+  host:"localhost",
+  port:5432,
+  database:"golf_by_u"
+});
+
+
+module.exports = db;
+
+// const db = require('../server/db/db-connection.js');
+
