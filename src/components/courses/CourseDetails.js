@@ -1,32 +1,44 @@
-import React, {useEffect, useState} from 'react';
-import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip } from '@material-ui/core';
+import React, {useEffect, useState, useMediaquery} from 'react';
+import { Box, Typography, useMediaQuery, Button, Card, CardMedia, CardContent, CardActions, Chip } from '@material-ui/core';
 //import LocationOnIcon from '@material-ui/icons/LocationOn';
 import useStyles from './courseDetailsStyle'
 import { getGolfCoursesData, getCourseDetailsData, getWeatherData } from '../../API-CALLS/api';
 
-
+let cc = console.log
 const CourseDetails = ( { course, selected, refProp } ) => {
+
+  const classes = useStyles()
+  const [ weather, setWeather ] = useState()
+
   if ( selected ) {
     refProp?.current?.scrollIntoView( { behavior: "smooth", block: 'start' } )
   }
 
-  const classes = useStyles()
+  //getting golf-course details from rapid API
+  const [ details, setDetails ] = useState( {} )
 
-  // The path "../../" might not be correct
+  useEffect( () => {
+    getCourseDetailsData( course.name, course.zip )
+      .then( ( details ) => {
+        setDetails( details )
+      
+        //console.log(details.course_details.result.photos[1])
+      } ).catch( ( err ) => {
+        console.log( err )
+      } ).finally( () => {
+      })
+},[course])
 
-  const [ weather, setWeather ] = useState(0)
-
-
-
-// image={ details ? details.whatever_the_url_xxxxxxx : 'https://www.gettyimages.com/phot
+  // image = {
+  //   details? details.whatever_the_url_xxxxxxx : 'https://www.gettyimages.com/phot
 
   return (
         <Card elevation={6}>
       <CardMedia
         style={ { height: 350 } }
-        image={ course.photo ? course.photo.images.large.url : 'https://images.squarespace-cdn.com/content/v1/5a8c9ed1d55b410cece9c9a0/1568236242518-8URRECJK2GRGY6I5UABU/PebbleBeachGolfLinks%2307_KingTide.jpg'}
+        image={ course.photos ? details.course_details.result.photos[1] : 'https://images.squarespace-cdn.com/content/v1/5a8c9ed1d55b410cece9c9a0/1568236242518-8URRECJK2GRGY6I5UABU/PebbleBeachGolfLinks%2307_KingTide.jpg'}
 
-        //image={ details ? details.course_details.result.photos[0].large.url : 'https://cdn.pixabay.com/photo/2015/06/21/15/03/jamaica-816669_1280.jpg'}
+        //image={ details.course_detail ? details.course_details.result.photos[0].large.url : 'https://cdn.pixabay.com/photo/2015/06/21/15/03/jamaica-816669_1280.jpg'}
         title={course.name}
       />
       <CardContent>
@@ -42,17 +54,6 @@ const CourseDetails = ( { course, selected, refProp } ) => {
           </Typography>
         </Box>
         <Box display="flex" justifyContent="space-between">
-
-        </Box>
-        {course?.awards?.map((award) => (
-          <Box display="flex" justifyContent="space-between" my={1} alignItems="center">
-            {/* <img src={award.images.small} /> */}
-            <Typography variant="subtitle2" color="textSecondary">{award.display_name}</Typography>
-          </Box>
-        ))}
-        {course?.cuisine?.map(({ name }) => (
-          <Chip key={name} size="small" label={name} className={classes.chip} />
-        ))}
         {course.address && (
           <Typography gutterBottom variant="body2" color="textSecondary" className={classes.subtitle}>
             {course.address}
@@ -62,7 +63,7 @@ const CourseDetails = ( { course, selected, refProp } ) => {
           <Typography variant="body2" color="textSecondary" className={classes.spacing}>
             {course.url}
           </Typography>
-        )}
+        )}</Box>
       </CardContent>
       <CardActions>
         <Button size="small" color="primary" onClick={() => window.open(course.web_url, '_blank')}>

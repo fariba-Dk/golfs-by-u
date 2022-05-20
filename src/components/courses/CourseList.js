@@ -17,13 +17,7 @@ const List = ({course,courses, rating, setRating, childClicked, isLoading }) => 
     setElRefs((refs) => Array(courses.length).fill().map((_, i) => refs[i] || createRef()));
   }, []);
 
-    useEffect( () => {
-    getCourseDetailsData(course)
-    .then( (details) => {
-      setDetails(details)
-});
-    }, [ course ] )
-  
+
   return (
     <div className={classes.container}>
       <Typography variant="h4">Golf Courses around you</Typography>

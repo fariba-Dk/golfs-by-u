@@ -7,17 +7,17 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+
 import '../../index.css'
 import useStyles from './mapStyle.js';
 
- // parse = require('node-html-parser');
-
 const libraries = [ "places" ];
-//getting props
-const Map = ({ coords, setCoords, setChildClicked, courses,details}) => {
-  //const matches = React.useMediaQuery('(min-width:600px)');
-  const classes = useStyles();
 
+
+let cc = console.log
+const Map = ({ coords, setCoords, setChildClicked, courses, details, weatherData}) => {
+
+  const classes = useStyles();
    const { isLoaded, loadError } = useLoadScript( {
   googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     libraries,
@@ -30,7 +30,6 @@ const Map = ({ coords, setCoords, setChildClicked, courses,details}) => {
     <>
     <div className={classes.mapContainer}>
       <GoogleMapReact
-      //bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY }}
         defaultCenter={ coords }
         id="map"
         center={coords}
@@ -42,23 +41,23 @@ const Map = ({ coords, setCoords, setChildClicked, courses,details}) => {
             setCoords( { lat: e.center.lat, lng: e.center.lng } )
           } }
         onChildClick={(child) => setChildClicked(child)}
-        >{ courses?.map( ( course, i ) =>
-          <div
-            className={ classes.markerContainer }
-            lat={ Number(course.latitude) }
-            lng={ Number( course.longitude ) }
+        >{ courses?.map( ( course, i ) =>(
+          <div className={classes.markerContainer}
+            lat={coords.lat}
+            lng={coords.lng }
             key={i}
-          >
-            <Paper elevation={ 3 } className={ classes.paper }>
-              <Typography className={ classes.typography } varient="subtitle2" gutterBottom>{ course.name }</Typography>
-              <image className={classes.pointer} src={course.photo ? course.photo.images.large.url : 'https://cdn.pixabay.com/photo/2015/06/21/15/03/jamaica-816669_1280.jpg'} alt={course.name}
-            /></Paper>
-          </div> ) }
+          >⛳️</div>
+        ) ) }
+               {weatherData?.list?.length && weatherData.list.map((data, i) => (
+          <div key={i} lat={data.coords.lat} lng={data.coords.lng}>
+            <img alt="weather data" src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} height="70px" />
+          </div>
+        ))}
       </GoogleMapReact>
       </div>
    </>
 
   );
-};
+}
 
 export default Map;

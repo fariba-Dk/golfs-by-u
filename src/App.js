@@ -15,7 +15,7 @@ const App = () => {
   // golf course hooks
   const [ details, setDetails ] = useState( {} )
   const [ courses, setCourses ] = useState( [] );
- 
+
 
   const [ autocomplete, setAutocomplete ] = useState( null );
   const [ childClicked, setChildClicked ] = useState( null );
@@ -38,8 +38,6 @@ const App = () => {
         .then( ( data ) => {
 
           setCourses( data.courses )
-          console.log( 'list from api', data )
-
         } )
         .catch( ( err ) =>
           console.log( err ) )
@@ -49,43 +47,6 @@ const App = () => {
         )
     }
   }
-//   useEffect( () => {
-//     if ( courses ) {
-//       setIsLoading(true)
-
-//       getCourseDetailsData( details.name, details.zip )
-//         .then( ( courseDetails ) => {
-//           setDetails( courseDetails.details )
-//           console.log( 'this is details', courseDetails )
-
-//         } ).catch( ( err ) => {
-//           console.log( err )
-
-//         } )
-
-//   }
-// },['courses'])
-
-
-
-
-
-
-/*
-{
-"course_details":{3 items
-"html_attributions":[]0 items
-"result":{7 items
-"formatted_address":"1700 17 Mile Dr, Pebble Beach, CA 93953, USA"
-"formatted_phone_number":"(831) 574-5609"
-"name":"Pebble Beach Golf Links"
-"photos":[...]10 items
-"rating":4.8
-"url":"https://maps.google.com/?cid=15094594552774239886"
-"website":"http://www.pebblebeach.com/golf/pebble-beach-golf-links"
-}
-"status":"OK"
-*/
 
   const onLoad = (autoC) => setAutocomplete(autoC);
 
