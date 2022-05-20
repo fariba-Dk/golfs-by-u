@@ -1,5 +1,5 @@
 import React, {useCallback,useState} from 'react';
-import { Paper, Typography, useMediaQuery } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import GoogleMapReact from 'google-map-react';
 import {
   GoogleMap,
@@ -18,13 +18,13 @@ let cc = console.log
 const Map = ({ coords, setCoords, setChildClicked, courses, details, weatherData}) => {
 
   const classes = useStyles();
-   const { isLoaded, loadError } = useLoadScript( {
-  googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+  const { isLoaded, loadError } = useLoadScript( {
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     libraries,
-   } );
+  } );
 
-   if ( loadError ) return "Error loading maps"
-   if ( !isLoaded ) return "Loading Maps..."
+  if ( loadError ) return "Error loading maps"
+  if ( !isLoaded ) return "Loading Maps..."
 
   return (
     <>
@@ -37,7 +37,7 @@ const Map = ({ coords, setCoords, setChildClicked, courses, details, weatherData
         margin={[50, 50, 50, 50]}
         options={''}
         // onClick={ onMapClick }
-          onChange={ ( e ) => {
+        onChange={ ( e ) => {
             setCoords( { lat: e.center.lat, lng: e.center.lng } )
           } }
         onChildClick={(child) => setChildClicked(child)}
@@ -51,7 +51,7 @@ const Map = ({ coords, setCoords, setChildClicked, courses, details, weatherData
 
       </GoogleMapReact>
       </div>
-   </>
+  </>
 
   );
 }
